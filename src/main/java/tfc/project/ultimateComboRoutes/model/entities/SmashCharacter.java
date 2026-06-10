@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Character {
+public class SmashCharacter {
 
 	private Long id;
 
@@ -25,11 +25,12 @@ public class Character {
 
 	private Administrator admin;
 
-	public Character() {
+	public SmashCharacter() {
 
 	}
 
-	public Character(String name, String description, int weight, String gravity, String render, Administrator admin) {
+	public SmashCharacter(String name, String description, int weight, String gravity, String render,
+			Administrator admin) {
 		this.name = name;
 		this.description = description;
 		this.weight = weight;

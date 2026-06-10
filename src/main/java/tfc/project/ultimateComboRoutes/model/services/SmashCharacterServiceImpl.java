@@ -9,25 +9,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tfc.project.ultimateComboRoutes.model.entities.Administrator;
 import tfc.project.ultimateComboRoutes.model.entities.AdministratorDao;
-import tfc.project.ultimateComboRoutes.model.entities.Character;
-import tfc.project.ultimateComboRoutes.model.entities.CharacterDao;
+import tfc.project.ultimateComboRoutes.model.entities.SmashCharacter;
+import tfc.project.ultimateComboRoutes.model.entities.SmashCharacterDao;
 import tfc.project.ultimateComboRoutes.model.exceptions.DuplicateInstanceException;
 import tfc.project.ultimateComboRoutes.model.exceptions.InstanceNotFoundException;
 
 @Service
 @Transactional
-public class CharacterServiceImpl implements CharacterService {
+public class SmashCharacterServiceImpl implements SmashCharacterService {
 
 	@Autowired
-	private CharacterDao characterDao;
+	private SmashCharacterDao smashCharacterDao;
 
 	@Autowired
 	private AdministratorDao adminDao;
 
 	@Override
 	@Transactional
-	public Character uploadCharacter(String name, String description, int weight, String gravity, String render,
-			Long adminId) throws InstanceNotFoundException, DuplicateInstanceException {
+	public SmashCharacter uploadSmashCharacter(String name, String description, int weight, String gravity,
+			String render, Long adminId) throws InstanceNotFoundException, DuplicateInstanceException {
 
 		Optional<Administrator> admin = adminDao.findById(adminId);
 
@@ -36,21 +36,21 @@ public class CharacterServiceImpl implements CharacterService {
 			throw new InstanceNotFoundException("El administrador no existe", adminId);
 		}
 
-		if (characterDao.existsByName(name)) {
+		if (smashCharacterDao.existsByName(name)) {
 
 			throw new DuplicateInstanceException("El personaje ya existe", name);
 		}
 
-		Character smashCharacter = new Character(name, description, weight, gravity, render, admin.get());
-		characterDao.save(smashCharacter);
+		SmashCharacter smashCharacter = new SmashCharacter(name, description, weight, gravity, render, admin.get());
+		smashCharacterDao.save(smashCharacter);
 		return smashCharacter;
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Character showCharacterDetails(Long characterId) throws InstanceNotFoundException {
+	public SmashCharacter showSmashCharacterDetails(Long characterId) throws InstanceNotFoundException {
 
-		Optional<Character> smashCharacter = characterDao.findById(characterId);
+		Optional<SmashCharacter> smashCharacter = smashCharacterDao.findById(characterId);
 
 		if (!smashCharacter.isPresent()) {
 
@@ -62,17 +62,17 @@ public class CharacterServiceImpl implements CharacterService {
 
 	@Override
 	@Transactional
-	public Character updateCharacterData(Long characterId, String name, String description, int weight, String gravity,
-			String render) throws InstanceNotFoundException, DuplicateInstanceException {
+	public SmashCharacter updateSmashCharacterData(Long characterId, String name, String description, int weight,
+			String gravity, String render) throws InstanceNotFoundException, DuplicateInstanceException {
 
-		Optional<Character> smashCharacter = characterDao.findById(characterId);
+		Optional<SmashCharacter> smashCharacter = smashCharacterDao.findById(characterId);
 
 		if (!smashCharacter.isPresent()) {
 
 			throw new InstanceNotFoundException("El personaje no existe", characterId);
 		}
 
-		if (characterDao.existsByName(name) && (!smashCharacter.get().getName().equals(name))) {
+		if (smashCharacterDao.existsByName(name) && (!smashCharacter.get().getName().equals(name))) {
 
 			throw new DuplicateInstanceException("El personaje ya existe", name);
 		}
@@ -88,16 +88,16 @@ public class CharacterServiceImpl implements CharacterService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ArrayList<Character> showAllCharacters() {
+	public ArrayList<SmashCharacter> showAllSmashCharacters() {
 
-		return characterDao.findAllBy();
+		return smashCharacterDao.findAllBy();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public ArrayList<Character> filterCharactersByName(String characterName) {
+	public ArrayList<SmashCharacter> filterSmashCharactersByName(String characterName) {
 
-		return characterDao.findByName(characterName);
+		return smashCharacterDao.findByName(characterName);
 	}
 
 }
