@@ -29,8 +29,7 @@ public class Character {
 
 	}
 
-	public Character(Long id, String name, String description, int weight, String gravity, String render,
-			Administrator admin) {
+	public Character(String name, String description, int weight, String gravity, String render, Administrator admin) {
 		this.name = name;
 		this.description = description;
 		this.weight = weight;
