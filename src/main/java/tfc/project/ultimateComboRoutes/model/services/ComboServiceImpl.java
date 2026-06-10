@@ -72,6 +72,13 @@ public class ComboServiceImpl implements ComboService {
 	@Transactional(readOnly = true)
 	public ArrayList<Combo> showCharacterCombos(Long characterId) throws InstanceNotFoundException {
 
+		Optional<SmashCharacter> smashCharacter = smashCharacterDao.findById(characterId);
+
+		if (!smashCharacter.isPresent()) {
+
+			throw new InstanceNotFoundException("El personaje no existe", characterId);
+		}
+
 		return comboDao.findByCharacterId(characterId);
 	}
 
@@ -80,6 +87,13 @@ public class ComboServiceImpl implements ComboService {
 	public ArrayList<Combo> showCharacterCombosByDifficulty(Long characterId, String difficulty)
 			throws InstanceNotFoundException {
 
-		return comboDao.findByCharacterIdAndDifficulty(characterId, difficulty);
+		Optional<SmashCharacter> smashCharacter = smashCharacterDao.findById(characterId);
+
+		if (!smashCharacter.isPresent()) {
+
+			throw new InstanceNotFoundException("El personaje no existe", characterId);
+		}
+
+		return comboDao.findBySmashCharacterIdAndDifficulty(characterId, difficulty);
 	}
 }

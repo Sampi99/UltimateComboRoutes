@@ -10,6 +10,5 @@ public interface ComboDao extends PagingAndSortingRepository<Combo, Long> {
 	@Query("SELECT c FROM Combo c WHERE c.smashCharacter = characterId")
 	ArrayList<Combo> findByCharacterId(Long characterId);
 
-	@Query("SELECT c FROM Combo c WHERE (c.smashCharacter = characterId) AND (LOWER(c.difficulty) LIKE %?2%")
-	ArrayList<Combo> findByCharacterIdAndDifficulty(Long characterId, String difficulty);
+	ArrayList<Combo> findBySmashCharacterIdAndDifficulty(Long characterId, String difficulty);
 }
