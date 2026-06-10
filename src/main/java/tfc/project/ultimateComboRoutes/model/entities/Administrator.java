@@ -33,6 +33,14 @@ public class Administrator {
 		this.email = email;
 	}
 
+	public Administrator(String username, String password, String name, String surname, String email) {
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
