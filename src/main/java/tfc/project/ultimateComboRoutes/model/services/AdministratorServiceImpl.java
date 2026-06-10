@@ -61,7 +61,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 			throw new InstanceNotFoundException(username, username);
 		}
 
-		if (dao.existsByUsername(username)) {
+		if ((dao.existsByUsername(username)) && (!admin.get().getUsername().equals(username))) {
 			throw new DuplicateInstanceException(username, username);
 		}
 
@@ -80,7 +80,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 		Optional<Administrator> admin = dao.findById(adminId);
 
 		if (!admin.isPresent()) {
-			throw new InstanceNotFoundException(admin.get().getUsername(), admin.get().getUsername());
+			throw new InstanceNotFoundException(adminId.toString(), adminId.toString());
 		}
 
 		if (!encoder.matches(oldPassword, admin.get().getPassword())) {
