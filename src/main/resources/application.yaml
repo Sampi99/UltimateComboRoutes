@@ -1,3 +1,42 @@
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
 spring:
-  application:
-    name: ultimateComboRoutes
+  datasource:
+    url: jdbc:mysql://localhost:3306/ultimatecomboroutes?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: jorgeSampedro
+    password: password
+    driverClassName: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+
+  devtools:
+    restart:
+      trigger-file: reload
+    livereload:
+      enabled: false
+  jackson:
+    default-property-inclusion: NON_NULL
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+      format-sql: true
+      use-sql-comments: true
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+server:
+  servlet:
+    context-path: /ultimatecomboroutes
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 215MB
+project:
+  jwt:
+    signKey: Bu:GW8bgPlEw
+    expirationMinutes: 1440
