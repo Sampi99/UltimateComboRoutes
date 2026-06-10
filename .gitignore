@@ -1,0 +1,19 @@
+mvnw
+mvnw.cmd
+.mvn
+**/build/
+**/node_modules/
+**/coverage
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.idea
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
