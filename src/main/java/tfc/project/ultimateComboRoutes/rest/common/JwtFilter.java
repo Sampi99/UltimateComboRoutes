@@ -42,7 +42,7 @@ public class JwtFilter extends BasicAuthenticationFilter {
 			JwtInfo jwtInfo = jwtGenerator.getInfo(serviceToken);
 
 			request.setAttribute("serviceToken", serviceToken);
-			request.setAttribute("userId", jwtInfo.getAdminId());
+			request.setAttribute("adminId", jwtInfo.getAdminId());
 
 			configureSecurityContext(jwtInfo.getUsername());
 
