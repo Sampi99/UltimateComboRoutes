@@ -87,6 +87,6 @@ public class AdministratorServiceImpl implements AdministratorService {
 			throw new WrongOldPasswordException();
 		}
 
-		admin.get().setPassword(encoder.encode(oldPassword));
+		admin.get().setPassword(encoder.encode(newPassword));
 	}
 }
