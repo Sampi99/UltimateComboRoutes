@@ -7,10 +7,10 @@ import tfc.project.ultimateComboRoutes.model.entities.SmashCharacter;
 
 public class SmashCharacterConversor {
 
-	public static final SmashCharacterDto toSmashCharacterDto(SmashCharacterDto dto) {
+	public static final SmashCharacterDto toSmashCharacterDto(SmashCharacter character) {
 
-		return new SmashCharacterDto(dto.getId(), dto.getName(), dto.getDescription(), dto.getWeight(),
-				dto.getGravity(), dto.getRender());
+		return new SmashCharacterDto(character.getId(), character.getName(), character.getDescription(),
+				character.getWeight(), character.getGravity(), character.getRender());
 	}
 
 	public static final SmashCharacterListDto toSmashCharacterListDto(SmashCharacter smashCharacter) {
