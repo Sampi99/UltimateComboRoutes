@@ -27,9 +27,6 @@ import tfc.project.ultimateComboRoutes.rest.dtos.SmashCharacterListDto;
 public class SmashCharacterController {
 
 	@Autowired
-	private String messageSource;
-
-	@Autowired
 	private SmashCharacterService characterService;
 
 	@PostMapping("/uploadCharacter")

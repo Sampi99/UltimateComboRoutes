@@ -27,7 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/administrators/signUp").permitAll()
 				.antMatchers(HttpMethod.POST, "/administrators/login").permitAll()
 				.antMatchers(HttpMethod.PUT, "/administrators/*").permitAll()
-				.antMatchers(HttpMethod.PUT, "/administrators/*/changePassword").permitAll();
+				.antMatchers(HttpMethod.PUT, "/administrators/*/changePassword").permitAll()
+				.antMatchers(HttpMethod.POST, "/smashCharacters/uploadCharacter").permitAll()
+				.antMatchers(HttpMethod.PUT, "/smashCharacters/*/updateCharacter").permitAll()
+				.antMatchers(HttpMethod.GET, "/smashCharacters/*").permitAll()
+				.antMatchers(HttpMethod.GET, "/smashCharacters/filterCharacters").permitAll()
+				.antMatchers(HttpMethod.POST, "/combos/*/addCombo").permitAll()
+				.antMatchers(HttpMethod.PUT, "/combos/*/editCombo").permitAll().antMatchers(HttpMethod.GET, "/combos/*")
+				.permitAll().antMatchers(HttpMethod.PUT, "/combos/*/filterByDifficulty").permitAll();
 
 	}
 
