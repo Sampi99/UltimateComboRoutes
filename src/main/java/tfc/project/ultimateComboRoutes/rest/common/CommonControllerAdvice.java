@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import tfc.project.ultimateComboRoutes.model.exceptions.DuplicateInstanceException;
 import tfc.project.ultimateComboRoutes.model.exceptions.InstanceNotFoundException;
 
+@ControllerAdvice
 public class CommonControllerAdvice {
 
 	private static final String INSTANCE_NOT_FOUND_EXCEPTION_CODE = "El elemento introducido no existe";
