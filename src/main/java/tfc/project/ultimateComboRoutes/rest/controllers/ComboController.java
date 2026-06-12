@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class ComboController {
 	private ComboService comboService;
 
 	@PostMapping("/{characterId}/addCombo")
-	public ComboDto addCombo(@RequestAttribute Long adminId, @PathVariable Long characterId, ComboDto dto)
+	public ComboDto addCombo(@RequestAttribute Long adminId, @PathVariable Long characterId, @RequestBody ComboDto dto)
 			throws InstanceNotFoundException {
 
 		Combo combo = comboService.addCombo(adminId, characterId, dto.getSecuence(), dto.getDifficulty(),
@@ -36,7 +37,7 @@ public class ComboController {
 	}
 
 	@PutMapping("/{id}/editCombo")
-	public ComboDto editCombo(@RequestAttribute Long adminId, @PathVariable Long id, ComboDto dto)
+	public ComboDto editCombo(@RequestAttribute Long adminId, @PathVariable Long id, @RequestBody ComboDto dto)
 			throws InstanceNotFoundException {
 
 		Combo combo = comboService.editCombo(id, dto.getSecuence(), dto.getDifficulty(), dto.getTotalDamage(),
