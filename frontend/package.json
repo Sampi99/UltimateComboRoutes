@@ -1,0 +1,33 @@
+{
+  "name": "ultimate_combo_routes",
+  "version": "1.0.0",
+  "homepage": "/ultimateComboRoutes",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.2",
+    "@popperjs/core": "^2.10.1",
+    "bootstrap": "^5.1.1",
+    "jquery": "^3.6.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-intl": "^5.20.12",
+    "react-redux": "^7.2.5",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-tag-input-component": "^2.0.2",
+    "react-test-renderer": "^17.0.2",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:8080/",
+  "browserslist": [
+    "defaults"
+  ]
+}
