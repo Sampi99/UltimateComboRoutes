@@ -54,7 +54,7 @@ export const showSmashCharacters = (
     );
 
 export const filterByName = (
-    name,
+    {name},
     onSuccess
 ) => 
     appFetch(
