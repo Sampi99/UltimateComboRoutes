@@ -15,7 +15,7 @@ public class SmashCharacterConversor {
 
 	public static final SmashCharacterListDto toSmashCharacterListDto(SmashCharacter smashCharacter) {
 
-		return new SmashCharacterListDto(smashCharacter.getRender(), smashCharacter.getName());
+		return new SmashCharacterListDto(smashCharacter.getId(), smashCharacter.getRender(), smashCharacter.getName());
 	}
 
 	public static final List<SmashCharacterListDto> toSmashCharacterListDtos(List<SmashCharacter> smashCharacters) {

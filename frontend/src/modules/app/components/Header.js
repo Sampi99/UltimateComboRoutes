@@ -40,6 +40,10 @@ const Header = () => {
 	                            <Link className="dropdown-item" to="/administrators/change-password">
 	                                <FormattedMessage id="Cambiar mi contraseña"/>
 	                            </Link>
+								<div className="dropdown-divider"></div>
+								<Link className="dropdown-item" to="/smashCharacters/uploadCharacter">
+	                                <FormattedMessage id="Registrar personaje"/>
+	                            </Link>
  	                            <div className="dropdown-divider"></div>
 	                            <Link className="dropdown-item" to="/administrators/logout">
 	                                <FormattedMessage id="Cerrar sesión"/>

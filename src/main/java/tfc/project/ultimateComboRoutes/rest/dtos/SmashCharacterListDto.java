@@ -2,6 +2,8 @@ package tfc.project.ultimateComboRoutes.rest.dtos;
 
 public class SmashCharacterListDto {
 
+	private Long id;
+
 	private String render;
 
 	private String name;
@@ -10,9 +12,18 @@ public class SmashCharacterListDto {
 
 	}
 
-	public SmashCharacterListDto(String render, String name) {
+	public SmashCharacterListDto(Long id, String render, String name) {
+		this.id = id;
 		this.render = render;
 		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getRender() {

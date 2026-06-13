@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import AppGlobalComponents from "./AppGlobalComponents";
 import Home from "./Home";
 import administrators, {Login, SignUp, SignUpAdmin, UpdateProfile, ChangePassword, Logout} from "../../administrators";
+import { CharacterUploadCompleted, ShowSmashCharacterDetails, UpdateSmashCharacterData, UploadSmashCharacter } from "../../smashCharacters";
 
 const Body = () => {
 	
@@ -17,11 +18,16 @@ const Body = () => {
 			<AppGlobalComponents/>
     		<Switch>
       			<Route exact path="/" component={Home} />
+				<Route exact path="/smashCharacters/smashCharacterDetails/:id" component={ShowSmashCharacterDetails}/>
+				{loggedIn && <Route exact path="/smashCharacters/:id/updateSmashCharacter"><UpdateSmashCharacterData/></Route>}
 				{loggedIn && <Route exact path="/administrators/update-profile"><UpdateProfile/></Route>}
             	{loggedIn && <Route exact path="/administrators/change-password"><ChangePassword/></Route>}
             	{loggedIn && <Route exact path="/administrators/logout"><Logout/></Route>}
             	{!loggedIn && <Route exact path="/administrators/login"><Login/></Route>}
             	{!loggedIn && <Route exact path="/administrators/signup"><SignUp/></Route>}
+				{loggedIn && <Route exact path ="/smashCharacters/uploadCharacter"><UploadSmashCharacter/></Route>}
+				{loggedIn && <Route exact path ="/smashCharacters/characterUploadCompleted"><CharacterUploadCompleted/></Route>}
+				{loggedIn && <Route exact path ="/smashCharacters/updateCharacter"><UpdateSmashCharacterData/></Route>}
 				<Route><Home/></Route>
     		</Switch>
 		</div>

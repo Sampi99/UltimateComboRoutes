@@ -14,7 +14,7 @@ export const uploadSmashCharacter = (name, description, weight, gravity, render,
         },
             onErrors);
     
-export const showSmashCharactersList = (smashCharacters) => ({
+export const showSmashCharactersListCompleted = (smashCharacters) => ({
     type: actionTypes.SHOW_CHARACTER_LIST_COMPLETED,
     smashCharacters: smashCharacters
 });
@@ -23,11 +23,11 @@ export const clearCharacters = () => ({
     type: actionTypes.CLEAR_LIST,
 });
 
-export const showSmashCharacters = () => dispatch =>
+export const showSmashCharacters = () => dispatch => {
     dispatch(clearCharacters());
-    backend.smashCharacterService.showSmashCharacters(smashCharacters => 
-        dispatch(showSmashCharactersList(smashCharacters))
-    );
+    backend.smashCharacterService.showSmashCharacters(result => 
+        dispatch(showSmashCharactersListCompleted(result)))
+}; 
 
 export const updateSmashCharacterCompleted = (smashCharacter) => ({
     type: actionTypes.UPDATE_DATA_COMPLETED,
@@ -47,15 +47,15 @@ export const showSmashCharacterDetailsCompleted = (smashCharacter) => ({
     smashCharacter
 });
 
-export const clearVideogame = () => ({
-    type: actionTypes.CLEAR_VIDEOGAME
+export const clearCharacter = () => ({
+    type: actionTypes.CLEAR_CHARACTER
 });
 
 export const showSmashCharacterDetails = id => dispatch => 
     backend.smashCharacterService.showSmashCharacterDetails(id, smashCharacter =>
         dispatch(showSmashCharacterDetailsCompleted(smashCharacter)));
 
-export const showSmashCharacterDetails = (id, onSuccess, onErrors) => dispatch => 
+export const showSmashCharacterDetails2 = (id, onSuccess, onErrors) => dispatch => 
     backend.smashCharacterService.showSmashCharacterDetails(id, smashCharacter => {
         dispatch(showSmashCharacterDetailsCompleted(smashCharacter));
         onSuccess(smashCharacter);
@@ -70,6 +70,6 @@ export const filterByNameCompleted = (smashCharacters) => ({
 export const filterByName = criteria => dispatch => {
     dispatch(clearCharacters());
     backend.smashCharacterService.filterByName(criteria, 
-        result => dispatch(showMyLibraryCompleted({criteria, result})))
+        result => dispatch(filterByNameCompleted(result)))
 }; 
 
