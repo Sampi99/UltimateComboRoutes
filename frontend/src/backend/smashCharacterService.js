@@ -3,53 +3,62 @@ import {
     appFetch,
 }from "./appFetch";
 
-export const addCombo = (
-    characterId,
-    secuence,
-    difficulty,
-    totalDamage,
-    demo,
+export const uploadSmashCharacter = (
+    name,
+    description,
+    weight,
+    gravity,
+    render,
     onSuccess,
     onErrors
 ) => 
     appFetch(
-        "/combos/addCombo", fetchConfig("POST", {characterId, secuence, 
-            difficulty, totalDamage, demo}),  
+        "/smashCharacters/uploadCharacter", fetchConfig("POST", {name, descrpition, 
+            weight, gravity, render}),  
             onSuccess,
             onErrors
         );
 
-export const editCombo = (
+export const updateSmashCharacter = (
     id,
-    secuence,
-    difficulty,
-    totalDamage,
-    demo,
+    name,
+    description,
+    weight,
+    gravity,
+    render,
     onSuccess,
     onErrors
 ) =>
     appFetch(
-        `/combos/${id}/editCombo`, fetchConfig("PUT", {secuence, difficulty,
-            totalDamage, demo}),
+        `/smashCharacters/${id}/updateCharacter`, fetchConfig("PUT", {name, description,
+            weight, gravity, render}),
             onSuccess,
             onErrors
         );
 
-export const showCharacterCombos = (
+export const showSmashCharacterDetails = (
     id,
     onSuccess
 ) =>
     appFetch(
-        `/combos/${characterId}`, fetchConfig("GET"),
+        `/smashCharacters/${id}`, fetchConfig("GET"),
+        onSuccess
+    );
+
+export const showSmashCharacters = (
+    onSuccess
+) =>
+    appFetch(
+        "/smashCharacters", fetchConfig("GET"),
         onSuccess
     );
 
 export const filterByName = (
-    {difficulty, characterId},
+    {name},
     onSuccess
 ) => 
     appFetch(
-        `/combos/${id}/filterByDifficulty?difficulty=${difficulty}`, fetchConfig("GET"),
+        `smashCharacters/filterCharacters?name=${name}`, fetchConfig("GET"),
         onSuccess
     );
     
