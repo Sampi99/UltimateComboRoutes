@@ -34,9 +34,10 @@ public class SmashCharacterServiceTests {
 	private Administrator signUpAdmin(String username)
 			throws DuplicateInstanceException, InstanceNotFoundException, WrongCredentialsException {
 
-		adminService.signUp(username, "pass", "nombre", "apellido", "correo@gmail.com");
+		Administrator admin = new Administrator(username, "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
 
-		return adminService.login(username, "pass");
+		adminService.signUp(admin);
+		return admin;
 	}
 
 	@Test
@@ -168,12 +169,9 @@ public class SmashCharacterServiceTests {
 
 		SmashCharacter firstCharacter = characterService.uploadSmashCharacter("Mario", "Descripción", 82, "Peso medio",
 				"imagen", admin.getId());
-		SmashCharacter secondCharacter = characterService.uploadSmashCharacter("Luigi", "Descripción", 82, "Peso medio",
-				"imagen", admin.getId());
-		SmashCharacter thirdCharacter = characterService.uploadSmashCharacter("Peach", "Descripción", 82, "Ligero",
-				"imagen", admin.getId());
-		SmashCharacter fourthCharacter = characterService.uploadSmashCharacter("Bowser", "Descripción", 82, "Pesado",
-				"imagen", admin.getId());
+		characterService.uploadSmashCharacter("Luigi", "Descripción", 82, "Peso medio", "imagen", admin.getId());
+		characterService.uploadSmashCharacter("Peach", "Descripción", 82, "Ligero", "imagen", admin.getId());
+		characterService.uploadSmashCharacter("Bowser", "Descripción", 82, "Pesado", "imagen", admin.getId());
 		SmashCharacter fifthCharacter = characterService.uploadSmashCharacter("Dr.Mario", "Descripción", 82, "Pesado",
 				"imagen", admin.getId());
 

@@ -7,7 +7,7 @@ import {Errors} from '../../common';
 import * as actions from '../actions';
 import * as selectors from '../selectors';
 
-const Login = () => {
+const ChangePassword = () => {
 
     const admin = useSelector(selectors.getAdmin);
     const dispatch = useDispatch();

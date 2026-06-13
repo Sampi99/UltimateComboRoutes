@@ -44,8 +44,8 @@ const handle4xxResponse = (response, onErrors) => {
     return false;
   }
 
-  if (response.status === 401 && reauthenticationCallback) {
-    reauthenticationCallback();
+  if (response.status === 401 && reauthenticationCallBack) {
+    reauthenticationCallBack();
     return true;
   }
 
@@ -77,10 +77,10 @@ const handleResponse = (response, onSuccess, onErrors) => {
   throw new NetworkError();
 };
 
-export const init = (callback) => (networkErrorCallback = callback);
+export const init = (callback) => (networkErrorCallBack = callback);
 
 export const setReauthenticationCallback = (callback) =>
-  (reauthenticationCallback = callback);
+  (reauthenticationCallBack = callback);
 
 export const setServiceToken = (serviceToken) =>
   sessionStorage.setItem(config.SERVICE_TOKEN_NAME, serviceToken);
@@ -122,4 +122,4 @@ export const fetchConfig = (method, body) => {
 export const appFetch = (path, options, onSuccess, onErrors) =>
   fetch(`${config.BASE_PATH}${path}`, options)
     .then((response) => handleResponse(response, onSuccess, onErrors))
-    .catch(networkErrorCallback);
+    .catch(networkErrorCallBack);

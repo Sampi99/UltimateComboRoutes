@@ -1,10 +1,12 @@
 package tfc.project.ultimateComboRoutes.rest.controllers;
 
+import java.net.URI;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import tfc.project.ultimateComboRoutes.model.entities.Administrator;
 import tfc.project.ultimateComboRoutes.model.exceptions.DuplicateInstanceException;
@@ -82,15 +85,18 @@ public class AdministratorController {
 	}
 
 	@PostMapping("/signUp")
-	public AdministratorDto signUp(@Validated @RequestBody AdministratorDto administratorDto)
+	public ResponseEntity<AuthenticatedAdminDto> signUp(@Validated @RequestBody AdministratorDto administratorDto)
 			throws DuplicateInstanceException {
 
 		Administrator admin = AdministratorConversor.toAdministrator(administratorDto);
 
-		adminService.signUp(admin.getUsername(), admin.getPassword(), admin.getName(), admin.getSurname(),
-				admin.getEmail());
+		adminService.signUp(admin);
 
-		return AdministratorConversor.toAdministratorDto(admin);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(admin.getId())
+				.toUri();
+
+		return ResponseEntity.created(location)
+				.body(AdministratorConversor.toAuthenticatedAdminDto(admin, generateServiceToken(admin)));
 
 	}
 
@@ -101,6 +107,16 @@ public class AdministratorController {
 		Administrator admin = adminService.login(credentials.getUsername(), credentials.getPassword());
 
 		return AdministratorConversor.toAuthenticatedAdminDto(admin, generateServiceToken(admin));
+
+	}
+
+	@PostMapping("/loginFromServiceToken")
+	public AuthenticatedAdminDto loginFromServiceToken(@RequestAttribute Long adminId,
+			@RequestAttribute String serviceToken) throws InstanceNotFoundException {
+
+		Administrator admin = adminService.loginFromId(adminId);
+
+		return AdministratorConversor.toAuthenticatedAdminDto(admin, serviceToken);
 
 	}
 

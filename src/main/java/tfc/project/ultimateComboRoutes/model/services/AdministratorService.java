@@ -8,10 +8,11 @@ import tfc.project.ultimateComboRoutes.model.exceptions.WrongOldPasswordExceptio
 
 public interface AdministratorService {
 
-	void signUp(String username, String password, String name, String surname, String email)
-			throws DuplicateInstanceException;
+	void signUp(Administrator admin) throws DuplicateInstanceException;
 
 	Administrator login(String username, String password) throws InstanceNotFoundException, WrongCredentialsException;
+
+	Administrator loginFromId(Long adminId) throws InstanceNotFoundException;
 
 	Administrator updateProfile(Long adminId, String username, String name, String surname, String email)
 			throws DuplicateInstanceException, InstanceNotFoundException;

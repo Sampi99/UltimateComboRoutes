@@ -14,7 +14,7 @@ const Header = () => {
 
         <nav className="navbar navbar-expand-lg navbar-light bg-light border">
 			<div className="container-fluid">
-	            <Link className="navbar-brand" to="/">Ultimat Combo Routes</Link>
+	            <Link className="navbar-brand" to="/">Ultimate Combo Routes</Link>
 	            <button className="navbar-toggler" type="button" 
 	                data-toggle="collapse" data-target="#navbarSupportedContent" 
 	                aria-controls="navbarSupportedContent" aria-expanded="false" 
@@ -52,8 +52,8 @@ const Header = () => {
 					
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-	                        <Link className="nav-link" to="/administrators/login">
-	                            <FormattedMessage id="Iniciar sesión"/>
+	                        <Link className="nav-link" to="/administrators/signUp">
+	                            <FormattedMessage id="Registrarse"/>
 	                        </Link>
 	                    </li>
 					</ul>

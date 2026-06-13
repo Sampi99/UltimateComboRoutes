@@ -9,7 +9,7 @@ import administrators, {Login, SignUp, SignUpAdmin, UpdateProfile, ChangePasswor
 const Body = () => {
 	
 	const loggedIn = useSelector(administrators.selectors.isLoggedIn);
-	const admin = useSelector(administrators.selectors.getUser);
+	const admin = useSelector(administrators.selectors.getAdmin);
 	
   	return (
 		<div className="container">

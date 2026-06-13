@@ -25,14 +25,12 @@ public class AdministratorServiceImpl implements AdministratorService {
 	private BCryptPasswordEncoder encoder;
 
 	@Override
-	public void signUp(String username, String password, String name, String surname, String email)
-			throws DuplicateInstanceException {
+	public void signUp(Administrator admin) throws DuplicateInstanceException {
 
-		if (dao.existsByUsername(username)) {
-			throw new DuplicateInstanceException(username, username);
+		if (dao.existsByUsername(admin.getUsername())) {
+			throw new DuplicateInstanceException(admin.getUsername(), admin.getUsername());
 		}
 
-		Administrator admin = new Administrator(username, password, name, surname, email);
 		admin.setPassword(encoder.encode(admin.getPassword()));
 		dao.save(admin);
 	}
@@ -45,6 +43,19 @@ public class AdministratorServiceImpl implements AdministratorService {
 
 		if ((!admin.isPresent()) || (!encoder.matches(password, admin.get().getPassword()))) {
 			throw new WrongCredentialsException();
+		}
+
+		return admin.get();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Administrator loginFromId(Long adminId) throws InstanceNotFoundException {
+
+		Optional<Administrator> admin = dao.findById(adminId);
+
+		if (!admin.isPresent()) {
+			throw new InstanceNotFoundException("El id no existe", adminId);
 		}
 
 		return admin.get();

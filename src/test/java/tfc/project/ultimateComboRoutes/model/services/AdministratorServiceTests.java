@@ -35,7 +35,8 @@ public class AdministratorServiceTests {
 	@Test
 	public void signUpTest() throws DuplicateInstanceException {
 
-		adminService.signUp("Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
+		Administrator admin = createAdmin("Sampi");
+		adminService.signUp(admin);
 
 		assertTrue(dao.existsByUsername("Sampi"));
 	}
@@ -43,16 +44,17 @@ public class AdministratorServiceTests {
 	@Test
 	public void signUpWithUsedUsernameTest() throws DuplicateInstanceException {
 
-		adminService.signUp("Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
+		Administrator admin = createAdmin("Sampi");
+		adminService.signUp(admin);
 
-		assertThrows(DuplicateInstanceException.class,
-				() -> adminService.signUp("Sampi", "contraseña2", "Jorge2", "Sampedro2", "correo@gmail.com3"));
+		assertThrows(DuplicateInstanceException.class, () -> adminService.signUp(admin));
 	}
 
 	@Test
 	public void loginTest() throws DuplicateInstanceException, InstanceNotFoundException, WrongCredentialsException {
 
-		adminService.signUp("Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
+		Administrator admin = createAdmin("Sampi");
+		adminService.signUp(admin);
 
 		Administrator loggedUpAdmin = adminService.login("Sampi", "contraseña");
 
@@ -62,7 +64,8 @@ public class AdministratorServiceTests {
 	@Test
 	public void loginWithWrongCredentialsTest() throws DuplicateInstanceException, InstanceNotFoundException {
 
-		adminService.signUp("Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
+		Administrator admin = createAdmin("Sampi");
+		adminService.signUp(admin);
 
 		assertThrows(WrongCredentialsException.class, () -> adminService.login("No soy Sampi", "contraseña"));
 		assertThrows(WrongCredentialsException.class, () -> adminService.login("Sampi", "contraseñaIncorrecta"));
@@ -71,7 +74,8 @@ public class AdministratorServiceTests {
 	@Test
 	public void updateProfileTest() throws DuplicateInstanceException, InstanceNotFoundException {
 
-		adminService.signUp("Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
+		Administrator admin = createAdmin("Sampi");
+		adminService.signUp(admin);
 
 		Administrator adminToUpdate = dao.findByUsername("Sampi").get();
 
@@ -94,8 +98,10 @@ public class AdministratorServiceTests {
 	@Test
 	public void updateProfileWithTakenUsername() throws DuplicateInstanceException {
 
-		adminService.signUp("Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
-		adminService.signUp("Nuevo Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
+		Administrator admin1 = createAdmin("Sampi");
+		adminService.signUp(admin1);
+		Administrator admin2 = createAdmin("Nuevo Sampi");
+		adminService.signUp(admin2);
 
 		assertThrows(DuplicateInstanceException.class,
 				() -> adminService.updateProfile(dao.findByUsername("Sampi").get().getId(), "Nuevo Sampi", "Marcos",
@@ -113,7 +119,8 @@ public class AdministratorServiceTests {
 	@Test
 	public void changePasswordButOldPasswordDoesNotMatch() throws DuplicateInstanceException {
 
-		adminService.signUp("Sampi", "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
+		Administrator admin = createAdmin("Sampi");
+		adminService.signUp(admin);
 
 		assertThrows(WrongOldPasswordException.class, () -> adminService
 				.changePassword(dao.findByUsername("Sampi").get().getId(), "Contraseña incorrecta", "nueva pass"));

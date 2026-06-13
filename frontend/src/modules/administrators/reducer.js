@@ -11,10 +11,10 @@ const admin = (state = initialState.admin, action) => {
     switch (action.type) {
 
         case actionTypes.SIGN_UP_COMPLETED:
-            return action.authenticatedAdmin.admin;
+            return action.authenticatedAdmin.administrator;
 
         case actionTypes.LOGIN_COMPLETED:
-            return action.authenticatedAdmin.admin;
+            return action.authenticatedAdmin.administrator;
 
         case actionTypes.LOGOUT:
             return initialState.admin;

@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import { ShowCatalog } from "../../videogames";
 
 const Home = () => {
 

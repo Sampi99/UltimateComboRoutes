@@ -38,9 +38,10 @@ public class ComboServiceTests {
 	private Administrator signUpAdmin(String username)
 			throws DuplicateInstanceException, InstanceNotFoundException, WrongCredentialsException {
 
-		adminService.signUp(username, "pass", "nombre", "apellido", "correo@gmail.com");
+		Administrator admin = new Administrator(username, "contraseña", "Jorge", "Sampedro", "correo@gmail.com");
 
-		return adminService.login(username, "pass");
+		adminService.signUp(admin);
+		return admin;
 	}
 
 	private SmashCharacter registerCharacter(String name, Long adminId)
