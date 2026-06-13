@@ -20,8 +20,9 @@ public class AdministratorConversor {
 				admin.getSurname(), admin.getEmail());
 	}
 
-	public static final AuthenticatedAdminDto toAuthenticatedAdminDto(Administrator admin, String serviceToken) {
+	public static final AuthenticatedAdminDto toAuthenticatedAdminDto(String serviceToken, Administrator admin) {
 
-		return new AuthenticatedAdminDto(toAdministratorDto(admin), serviceToken);
+		return new AuthenticatedAdminDto(serviceToken, toAdministratorDto(admin));
+
 	}
 }

@@ -96,7 +96,7 @@ public class AdministratorController {
 				.toUri();
 
 		return ResponseEntity.created(location)
-				.body(AdministratorConversor.toAuthenticatedAdminDto(admin, generateServiceToken(admin)));
+				.body(AdministratorConversor.toAuthenticatedAdminDto(generateServiceToken(admin), admin));
 
 	}
 
@@ -106,7 +106,7 @@ public class AdministratorController {
 
 		Administrator admin = adminService.login(credentials.getUsername(), credentials.getPassword());
 
-		return AdministratorConversor.toAuthenticatedAdminDto(admin, generateServiceToken(admin));
+		return AdministratorConversor.toAuthenticatedAdminDto(generateServiceToken(admin), admin);
 
 	}
 
@@ -116,7 +116,7 @@ public class AdministratorController {
 
 		Administrator admin = adminService.loginFromId(adminId);
 
-		return AdministratorConversor.toAuthenticatedAdminDto(admin, serviceToken);
+		return AdministratorConversor.toAuthenticatedAdminDto(generateServiceToken(admin), admin);
 
 	}
 

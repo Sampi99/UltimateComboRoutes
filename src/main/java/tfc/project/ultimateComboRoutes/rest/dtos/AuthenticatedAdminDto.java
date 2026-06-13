@@ -4,27 +4,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthenticatedAdminDto {
 
-	private AdministratorDto adminDto;
-
 	private String serviceToken;
 
+	private AdministratorDto adminDto;
+
 	public AuthenticatedAdminDto() {
-
 	}
 
-	public AuthenticatedAdminDto(AdministratorDto adminDto, String serviceToken) {
-		super();
-		this.adminDto = adminDto;
-		this.serviceToken = serviceToken;
-	}
+	public AuthenticatedAdminDto(String serviceToken, AdministratorDto adminDto) {
 
-	@JsonProperty("administrator")
-	public AdministratorDto getAdminDto() {
-		return adminDto;
-	}
+		setServiceToken(serviceToken);
+		setAdministratorDto(adminDto);
 
-	public void setAdminDto(AdministratorDto adminDto) {
-		this.adminDto = adminDto;
 	}
 
 	public String getServiceToken() {
@@ -33,6 +24,15 @@ public class AuthenticatedAdminDto {
 
 	public void setServiceToken(String serviceToken) {
 		this.serviceToken = serviceToken;
+	}
+
+	@JsonProperty("administrator")
+	public AdministratorDto getAdministratorDto() {
+		return adminDto;
+	}
+
+	public void setAdministratorDto(AdministratorDto adminDto) {
+		this.adminDto = adminDto;
 	}
 
 }
