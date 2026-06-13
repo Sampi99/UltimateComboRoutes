@@ -6,8 +6,8 @@ export const signUpCompleted = authenticatedAdmin => ({
     authenticatedAdmin
 });
 
-export const signUp = (admin, onSuccess, onErrors, reauthenticationCallback) => dispatch =>
-    backend.administratorService.signUp(admin,
+export const signUp = (administrator, onSuccess, onErrors, reauthenticationCallback) => dispatch =>
+    backend.administratorService.signUp(administrator,
         authenticatedAdmin => {
             dispatch(signUpCompleted(authenticatedAdmin));
             onSuccess();
@@ -49,13 +49,13 @@ export const logout = () => {
 
 };
 
-export const updateProfileCompleted = admin => ({
+export const updateProfileCompleted = administrator => ({
     type: actionTypes.UPDATE_PROFILE_COMPLETED,
-    admin
+    administrator
 })
 
-export const updateProfile = (admin, onSuccess, onErrors) => dispatch =>
-    backend.administratorService.updateProfile(admin, 
+export const updateProfile = (administrator, onSuccess, onErrors) => dispatch =>
+    backend.administratorService.updateProfile(administrator, 
         a => {
             dispatch(updateProfileCompleted(a));
             onSuccess();

@@ -41,7 +41,7 @@ const Header = () => {
 	                                <FormattedMessage id="Cambiar mi contraseña"/>
 	                            </Link>
  	                            <div className="dropdown-divider"></div>
-	                            <Link className="dropdown-item" to="/">
+	                            <Link className="dropdown-item" to="/administrators/logout">
 	                                <FormattedMessage id="Cerrar sesión"/>
 	                            </Link>
 	                        </div>
@@ -52,8 +52,8 @@ const Header = () => {
 					
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-	                        <Link className="nav-link" to="/administrators/signUp">
-	                            <FormattedMessage id="Registrarse"/>
+	                        <Link className="nav-link" to="/administrators/login">
+	                            <FormattedMessage id="Iniciar sesión"/>
 	                        </Link>
 	                    </li>
 					</ul>

@@ -13,7 +13,7 @@ const ChangePassword = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [oldPassword, setOldPassword] = useState('');
-    const [newPassword, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [backendErrors, setBackendErrors] = useState(null);
     let form;
 

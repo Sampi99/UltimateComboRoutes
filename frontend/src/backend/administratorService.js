@@ -6,7 +6,7 @@ import {
     removeServiceToken,
     setReauthenticationCallback,
 } from "./appFetch";
-
+  
 const processLoginSignUp = (authenticatedAdmin, reauthenticationCallback, onSuccess) => {
   setServiceToken(authenticatedAdmin.serviceToken);
   setReauthenticationCallback(reauthenticationCallback);
@@ -29,17 +29,6 @@ export const login = (
     onErrors
   );
   
-export const signUp = (admin, onSuccess, onErrors, reauthenticationCallback) => {
-  appFetch(
-    "/administrators/signUp",
-    fetchConfig("POST", admin),
-    (authenticatedAdmin) => {
-      processLoginSignUp(authenticatedAdmin, reauthenticationCallback, onSuccess);
-    },
-    onErrors
-  );
-};
-
 export const tryLoginFromServiceToken = (
   onSuccess,
   reauthenticationCallback
@@ -61,10 +50,21 @@ export const tryLoginFromServiceToken = (
   );
 };
   
+export const signUp = (administrator, onSuccess, onErrors, reauthenticationCallback) => {
+  appFetch(
+    "/administrators/signUp",
+    fetchConfig("POST", administrator),
+    (authenticatedAdmin) => {
+      processLoginSignUp(authenticatedAdmin, reauthenticationCallback, onSuccess);
+    },
+    onErrors
+  );
+};
+  
 export const logout = () => removeServiceToken();
   
-export const updateProfile = (admin, onSuccess, onErrors) =>
-  appFetch(`/administrators/${admin.id}`, fetchConfig("PUT", admin), onSuccess, onErrors);
+export const updateProfile = (administrator, onSuccess, onErrors) =>
+  appFetch(`/administrators/${administrator.id}`, fetchConfig("PUT", administrator), onSuccess, onErrors);
   
 export const changePassword = (
   id,
@@ -75,7 +75,7 @@ export const changePassword = (
 ) =>
   appFetch(
     `/administrators/${id}/changePassword`,
-    fetchConfig("POST", { oldPassword, newPassword }),
+    fetchConfig("PUT", { oldPassword, newPassword }),
     onSuccess,
     onErrors
   );

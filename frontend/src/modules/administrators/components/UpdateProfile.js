@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
+import * as selectors from '../selectors';
 
 const UpdateProfile = () => {
 
+    const administrator = useSelector(selectors.getAdmin);
     const dispatch = useDispatch();
     const history = useHistory();
     const [username, setUsername] = useState('');
@@ -24,7 +26,8 @@ const UpdateProfile = () => {
         if (form.checkValidity()) {
             
             dispatch(actions.updateProfile(
-                {username: username.trim(),
+                {id: administrator.id, 
+                username: username.trim(),
                 name: name.trim(),
                 surname: surname.trim(),
                 email: email.trim()},
@@ -62,20 +65,6 @@ const UpdateProfile = () => {
                                     value={username}
                                     onChange={e => setUsername(e.target.value)}
                                     autoFocus
-                                    required/>
-                                <div className="invalid-feedback">
-                                    <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row py-sm-1">
-                            <label htmlFor="password" className="col-md-3 col-form-label">
-                                <FormattedMessage id="Contraseña"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="password" id="password" className="form-control"
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
                                     required/>
                                 <div className="invalid-feedback">
                                     <FormattedMessage id='project.global.validator.required'/>

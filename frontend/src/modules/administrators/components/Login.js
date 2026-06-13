@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
-import {Errors} from '../../common';
+import {BackLink, Errors} from '../../common';
 import * as actions from '../actions';
 
 const Login = () => {
@@ -20,10 +20,10 @@ const Login = () => {
         event.preventDefault();
 
         if (form.checkValidity()) {
-            
+
             dispatch(actions.login(
-                {username: username.trim(),
-                password: password},
+                username.trim(),
+                password,
                 () => history.push('/'),
                 errors => setBackendErrors(errors),
                 () => {
@@ -31,13 +31,10 @@ const Login = () => {
                     dispatch(actions.logout());
                 }
             ));
-            
 
         } else {
-
             setBackendErrors(null);
             form.classList.add('was-validated');
-
         }
 
     }
@@ -47,10 +44,10 @@ const Login = () => {
             <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
             <div className="card bg-light border-dark">
                 <h5 className="card-header">
-                    <FormattedMessage id="Inicio de sesión"/>
+                    <FormattedMessage id="Iniciar sesión"/>
                 </h5>
                 <div className="card-body">
-                    <form ref={node => form = node}
+                    <form ref={node => form = node} 
                         className="needs-validation" noValidate 
                         onSubmit={e => handleSubmit(e)}>
                         <div className="form-group row py-sm-1">
@@ -58,7 +55,7 @@ const Login = () => {
                                 <FormattedMessage id="Nombre de usuario"/>
                             </label>
                             <div className="col-md-4">
-                                <input type="text" id="username" className="form-control"
+                                <input type="text" id="username" className="form-control" 
                                     value={username}
                                     onChange={e => setUsername(e.target.value)}
                                     autoFocus
@@ -83,7 +80,7 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="form-group row py-sm-2">
-                            <div className="offset-md-3 col-md-2">
+                            <div className="offset-md-3 col-md-1">
                                 <button type="submit" className="btn btn-primary">
                                     <FormattedMessage id="Confirmar"/>
                                 </button>
@@ -92,7 +89,13 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+            <p className="text-center">
+                <Link className="nav-link" to="/administrators/signup">
+                    <FormattedMessage id="¿No tienes una cuenta? Regístrate ahora"/>
+                </Link>
+            </p>
         </div>
+        
     );
 
 }
