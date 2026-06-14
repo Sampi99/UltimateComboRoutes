@@ -13,7 +13,7 @@ export const addCombo = (
     onErrors
 ) => 
     appFetch(
-        "/combos/addCombo", fetchConfig("POST", {characterId, secuence, 
+        `/combos/${characterId}/addCombo`, fetchConfig("POST", {characterId, secuence, 
             difficulty, totalDamage, demo}),  
             onSuccess,
             onErrors
@@ -40,7 +40,7 @@ export const showCharacterCombos = (
     onSuccess
 ) =>
     appFetch(
-        `/combos/${characterId}`, fetchConfig("GET"),
+        `/combos/${id}`, fetchConfig("GET"),
         onSuccess
     );
 
@@ -49,7 +49,7 @@ export const filterByDifficulty = (
     onSuccess
 ) => 
     appFetch(
-        `/combos/${id}/filterByDifficulty?difficulty=${difficulty}`, fetchConfig("GET"),
+        `/combos/${characterId}/filterByDifficulty?difficulty=${difficulty}`, fetchConfig("GET"),
         onSuccess
     );
     

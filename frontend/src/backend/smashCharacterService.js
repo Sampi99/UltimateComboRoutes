@@ -13,7 +13,7 @@ export const uploadSmashCharacter = (
     onErrors
 ) => 
     appFetch(
-        "/smashCharacters/uploadCharacter", fetchConfig("POST", {name, descrpition, 
+        "/smashCharacters/uploadCharacter", fetchConfig("POST", {name, description, 
             weight, gravity, render}),  
             onSuccess,
             onErrors

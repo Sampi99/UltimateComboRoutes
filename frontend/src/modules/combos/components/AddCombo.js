@@ -1,34 +1,37 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
 import {Errors} from '../../common';
 import * as actions from '../actions';
 
-const UploadSmashCharacter = () => {
+const AddCombo = () => {
 
+    const { id } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [weight, setWeight] = useState('');
-    const [gravity, setGravity] = useState('');
-    const [render, setRender] = useState('');
+    const [secuence, setSecuence] = useState('');
+    const [difficulty, setDifficulty] = useState('');
+    const [totalDamage, setTotalDamage] = useState('');
+    const [demo, setDemo] = useState('')
     const [backendErrors, setBackendErrors] = useState(null);
+    const characterId = Number(id);
     let form;
+
 
     const handleSubmit = event => {
 
         event.preventDefault();
 
         if (form.checkValidity()) {
+            if(!Number.isNaN(characterId)) {
             
-            dispatch(actions.uploadSmashCharacter(name, description, weight, gravity, render, 
-                () => history.push('/smashCharacters/characterUploadCompleted'),
-                errors => setBackendErrors(errors)
-            ));
-            
+                dispatch(actions.addCombo(characterId, secuence, difficulty, totalDamage, demo, 
+                    () => history.push('/combos/comboAdditionCompleted'),
+                    errors => setBackendErrors(errors)
+                ));
+            }   
 
         } else {
 
@@ -44,20 +47,20 @@ const UploadSmashCharacter = () => {
             <Errors errors={backendErrors} onClose={() => setBackendErrors(null)}/>
             <div className="card bg-light border-dark">
                 <h5 className="card-header">
-                    <FormattedMessage id="Registro de personajes"/>
+                    <FormattedMessage id="Registro de combos"/>
                 </h5>
                 <div className="card-body">
                     <form ref={node => form = node}
                         className="needs-validation" noValidate 
                         onSubmit={e => handleSubmit(e)}>
                         <div className="form-group row py-sm-1">
-                            <label htmlFor="name" className="col-md-3 col-form-label">
-                                <FormattedMessage id="Nombre del personaje"/>
+                            <label htmlFor="secuence" className="col-md-3 col-form-label">
+                                <FormattedMessage id="Secuencia de ataques"/>
                             </label>
                             <div className="col-md-4">
-                                <input type="text" id="name" className="form-control"
-                                    value={name}
-                                    onChange={e => setName(e.target.value)}
+                                <input type="text" id="secuence" className="form-control"
+                                    value={secuence}
+                                    onChange={e => setSecuence(e.target.value)}
                                     autoFocus
                                     required/>
                                 <div className="invalid-feedback">
@@ -66,13 +69,13 @@ const UploadSmashCharacter = () => {
                             </div>
                         </div>
                         <div className="form-group row py-sm-1">
-                            <label htmlFor="description" className="col-md-3 col-form-label">
-                                <FormattedMessage id="Descripción"/>
+                            <label htmlFor="difficulty" className="col-md-3 col-form-label">
+                                <FormattedMessage id="Dificultad"/>
                             </label>
                             <div className="col-md-4">
-                                <input type="textarea" id="description" className="form-control"
-                                    value={description}
-                                    onChange={e => setDescription(e.target.value)}
+                                <input type="text" id="difficulty" className="form-control"
+                                    value={difficulty}
+                                    onChange={e => setDifficulty(e.target.value)}
                                     required/>
                                 <div className="invalid-feedback">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -80,13 +83,13 @@ const UploadSmashCharacter = () => {
                             </div>
                         </div>
                         <div className="form-group row py-sm-1">
-                            <label htmlFor="weight" className="col-md-3 col-form-label">
-                                <FormattedMessage id="Peso"/>
+                            <label htmlFor="totalDamage" className="col-md-3 col-form-label">
+                                <FormattedMessage id="Daño total (%)"/>
                             </label>
                             <div className="col-md-4">
-                                <input type="number" id="weight" className="form-control"
-                                    value={weight}
-                                    onChange={e => setWeight(e.target.value)}
+                                <input type="number" id="totalDamage" className="form-control"
+                                    value={totalDamage}
+                                    onChange={e => setTotalDamage(e.target.value)}
                                     required/>
                                 <div className="invalid-feedback">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -94,27 +97,13 @@ const UploadSmashCharacter = () => {
                             </div>
                         </div>
                         <div className="form-group row py-sm-1">
-                            <label htmlFor="gravity" className="col-md-3 col-form-label">
-                                <FormattedMessage id="Gravedad / velocidad de caída"/>
+                            <label htmlFor="demo" className="col-md-3 col-form-label">
+                                <FormattedMessage id="Demostración textual"/>
                             </label>
                             <div className="col-md-4">
-                                <input type="text" id="gravity" className="form-control"
-                                    value={gravity}
-                                    onChange={e => setGravity(e.target.value)}
-                                    required/>
-                                <div className="invalid-feedback">
-                                    <FormattedMessage id='project.global.validator.required'/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="form-group row py-sm-1">
-                            <label htmlFor="render" className="col-md-3 col-form-label">
-                                <FormattedMessage id="Render"/>
-                            </label>
-                            <div className="col-md-4">
-                                <input type="text" id="render" className="form-control"
-                                    value={render}
-                                    onChange={e => setRender(e.target.value)}
+                                <input type="text" id="demo" className="form-control"
+                                    value={demo}
+                                    onChange={e => setDemo(e.target.value)}
                                     required/>
                                 <div className="invalid-feedback">
                                     <FormattedMessage id='project.global.validator.required'/>
@@ -136,4 +125,4 @@ const UploadSmashCharacter = () => {
 
 }
 
-export default UploadSmashCharacter;
+export default AddCombo;

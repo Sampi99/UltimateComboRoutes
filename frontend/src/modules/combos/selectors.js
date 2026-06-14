@@ -6,5 +6,5 @@ export const getCombo= state =>
 export const getCombos = state =>
     getModuleState(state).combos;
 
-export const getLastSmashCharacter = state =>
+export const getLastCombo = state =>
     getModuleState(state).lastCombo;

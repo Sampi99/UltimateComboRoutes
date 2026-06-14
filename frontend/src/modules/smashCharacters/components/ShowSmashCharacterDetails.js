@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import {useParams} from 'react-router-dom';
 import * as selectors from '../selectors';
 import * as actions from '../actions';
-import { BackLink } from '../../common';
+import ShowCombosLink from './ShowCombosLink';
 
 const ShowSmashCharacterDetails = () => {
 
@@ -30,6 +30,7 @@ const ShowSmashCharacterDetails = () => {
 
     return (
 		<div>
+            <ShowCombosLink id={smashCharacter.id}/>
 			<div className="card text-center">
 				<div className="card-body">
 					<h5 className="card-title">

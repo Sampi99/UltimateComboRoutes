@@ -23,7 +23,7 @@ export const clearCombos = () => ({
     type: actionTypes.CLEAR_COMBOS,
 });
 
-export const showSmashCharacters = (id) => dispatch => {
+export const showcCharacterCombos= (id) => dispatch => {
     dispatch(clearCombos());
     backend.comboService.showCharacterCombos(id, result => 
         dispatch(showCharacterCombosCompleted(result)))
@@ -36,7 +36,7 @@ export const editComboCompleted = (combo) => ({
 
 export const editCombo = (id, secuence, difficulty, totalDamage, demo, onSuccess, 
     onErrors) => dispatch => backend.comboService.editCombo(id,
-        secuence, diffculty, totalDamage, demo, combo => {
+        secuence, difficulty, totalDamage, demo, combo => {
             dispatch(editComboCompleted(combo));
             onSuccess();
         },

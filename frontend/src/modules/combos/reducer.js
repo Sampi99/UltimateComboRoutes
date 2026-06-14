@@ -13,7 +13,7 @@ const combo = (state = initialState.combo, action = {}) => {
     switch (action.type) {
 
         case actionTypes.COMBO_EDITION_COMPLETED:
-            return action.smashCharacter;
+            return action.combo;
 
         default:
             return state;

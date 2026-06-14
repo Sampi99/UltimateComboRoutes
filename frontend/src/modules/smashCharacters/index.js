@@ -10,5 +10,6 @@ export {default as UpdateSmashCharacterData} from './components/UpdateSmashChara
 export {default as UploadSmashCharacter} from './components/UploadSmashCharacter';
 export {default as CharacterUploadCompleted} from './components/CharacterUploadCompleted';
 export {default as CharacterList} from './components/CharacterList';
+export {default as ShowCombosLink} from './components/ShowCombosLink';
 
 export default {actions, actionTypes, reducer, selectors};
